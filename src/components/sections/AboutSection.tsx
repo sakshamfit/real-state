@@ -14,7 +14,7 @@ export function AboutSection() {
   const inView = useInView(ref, { once: true, margin: "-15%" });
 
   return (
-    <section ref={ref} className="relative bg-black overflow-hidden py-32 md:py-44 px-8 md:px-14">
+    <section ref={ref} className="relative bg-black overflow-hidden py-20 sm:py-32 md:py-44 px-6 sm:px-8 md:px-14">
 
       {/* Background watermark */}
       <span
@@ -25,7 +25,7 @@ export function AboutSection() {
         1998
       </span>
 
-      <div className="max-w-screen-xl mx-auto grid md:grid-cols-2 gap-16 md:gap-24 items-start">
+      <div className="max-w-screen-xl mx-auto grid md:grid-cols-2 gap-12 md:gap-24 items-start">
 
         {/* ── Left column ───────────────────────────────────────────── */}
         <div>
@@ -43,7 +43,7 @@ export function AboutSection() {
 
           <motion.h2
             className="font-serif text-white"
-            style={{ fontSize: "clamp(2.6rem, 5vw, 5.5rem)", lineHeight: 1.07 }}
+            style={{ fontSize: "clamp(2.25rem, 6.5vw, 5.5rem)", lineHeight: 1.07 }}
             initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: "easeOut", delay: 0.1 }}
           >
@@ -63,7 +63,7 @@ export function AboutSection() {
             initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.32 }}
           >
-            For over two decades, Meridian Development Group has designed and delivered homes that don't merely occupy the coastline — they belong to it. We build where others hesitate, because we understand the forces at play.
+            For over two decades, Meridian Development Group has designed and delivered homes that don&rsquo;t merely occupy the coastline — they belong to it. We build where others hesitate, because we understand the forces at play.
           </motion.p>
 
           <motion.p

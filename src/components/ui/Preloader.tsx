@@ -34,11 +34,11 @@ export function Preloader({ progress, isComplete, onDone }: PreloaderProps) {
       className="fixed inset-0 z-[1000] flex items-center justify-center"
       style={{ background: "#000" }}
     >
-      <div className="flex flex-col items-center gap-7">
+      <div className="flex flex-col items-center gap-7 px-6">
 
         <h1
-          className="pl-text font-serif text-white"
-          style={{ fontSize: "clamp(2.8rem, 7vw, 7.5rem)", letterSpacing: "0.22em", opacity: 0 }}
+          className="pl-text font-serif text-white text-center"
+          style={{ fontSize: "clamp(1.9rem, 8vw, 7.5rem)", letterSpacing: "0.22em", opacity: 0 }}
         >
           MERIDIAN
         </h1>

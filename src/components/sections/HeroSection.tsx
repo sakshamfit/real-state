@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import { useImageSequence } from "@/hooks/useImageSequence";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Preloader } from "@/components/ui/Preloader";
 import { clamp } from "@/lib/utils";
 
@@ -37,16 +38,10 @@ export function HeroSection({ onReady }: HeroProps) {
 
   const [preloaderDone, setPreloaderDone] = useState(false);
   const [activeTag,     setActiveTag]     = useState(0);
-  const [isMobile,      setIsMobile]      = useState(false);
-  const [isReduced,     setIsReduced]     = useState(false);
+  const isMobile  = useMediaQuery("(max-width: 767px)");
+  const isReduced = useMediaQuery("(prefers-reduced-motion: reduce)");
 
   const { loadProgress, isLoaded, drawFrame } = useImageSequence(canvasRef, FRAME_COUNT);
-
-  // ── env ───────────────────────────────────────────────────────────────────
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-    setIsReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
 
   // ── canvas size ───────────────────────────────────────────────────────────
   const syncCanvas = useCallback(() => {
@@ -118,13 +113,18 @@ export function HeroSection({ onReady }: HeroProps) {
   // ── mobile ────────────────────────────────────────────────────────────────
   if (isMobile || isReduced) {
     return (
-      <section className="relative w-full h-screen overflow-hidden bg-charcoal">
+      <section className="relative w-full h-screen-dvh overflow-hidden bg-charcoal">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/frames%201/ezgif-frame-001.jpg" alt="Meridian" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to top,rgba(26,26,24,0.9) 0%,rgba(26,26,24,0.2) 60%,transparent 100%)" }} />
-        <div className="absolute bottom-14 left-6 right-6">
+        <div className="absolute bottom-12 sm:bottom-14 left-6 right-6">
           <p className="text-white/50 font-sans text-[9px] uppercase mb-3" style={{ letterSpacing: "0.26em" }}>Est. 1998</p>
-          <h1 className="font-serif text-white text-5xl leading-tight">Where life is built<br /><em>to be lived in.</em></h1>
+          <h1
+            className="font-serif text-white"
+            style={{ fontSize: "clamp(2.15rem, 9vw, 3.5rem)", lineHeight: 1.08 }}
+          >
+            Where life is built<br /><em>to be lived in.</em>
+          </h1>
         </div>
       </section>
     );
@@ -142,8 +142,7 @@ export function HeroSection({ onReady }: HeroProps) {
       <div
         ref={containerRef}
         id="hero"
-        className="relative w-full overflow-hidden bg-charcoal"
-        style={{ height: "100vh" }}
+        className="relative w-full h-screen-dvh overflow-hidden bg-charcoal"
       >
         {/* Canvas */}
         <canvas

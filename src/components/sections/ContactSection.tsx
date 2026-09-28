@@ -18,7 +18,7 @@ export function ContactSection() {
   };
 
   return (
-    <section ref={ref} className="relative bg-black py-28 md:py-40 px-8 md:px-14 overflow-hidden">
+    <section ref={ref} className="relative bg-black py-20 sm:py-28 md:py-40 px-6 sm:px-8 md:px-14 overflow-hidden">
 
       {/* Background watermark */}
       <span
@@ -29,7 +29,7 @@ export function ContactSection() {
         MDG
       </span>
 
-      <div className="max-w-screen-xl mx-auto grid md:grid-cols-2 gap-16 md:gap-28">
+      <div className="max-w-screen-xl mx-auto grid md:grid-cols-2 gap-12 md:gap-28">
 
         {/* ── Left ─────────────────────────────────────────────────────── */}
         <div>
@@ -46,7 +46,7 @@ export function ContactSection() {
 
           <motion.h2
             className="font-serif text-white"
-            style={{ fontSize: "clamp(2.4rem, 4.5vw, 5rem)", lineHeight: 1.1 }}
+            style={{ fontSize: "clamp(2.15rem, 6vw, 5rem)", lineHeight: 1.1 }}
             initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.85, delay: 0.1 }}
           >
@@ -95,13 +95,13 @@ export function ContactSection() {
           {sent ? (
             <div className="h-full flex flex-col justify-center">
               <p className="font-serif text-white text-3xl mb-3">Thank you.</p>
-              <p className="font-sans text-white/65 text-[15px]">We'll be in touch within 24 hours.</p>
+              <p className="font-sans text-white/65 text-[15px]">We&rsquo;ll be in touch within 24 hours.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-7" suppressHydrationWarning>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6 md:gap-7" suppressHydrationWarning>
 
               {/* Name + Email */}
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {[
                   { name: "name",  label: "Full Name",     type: "text" },
                   { name: "email", label: "Email Address", type: "email" },
@@ -140,7 +140,7 @@ export function ContactSection() {
                       type="button"
                       suppressHydrationWarning
                       onClick={() => setSelected(v)}
-                      className="px-3.5 py-1.5 rounded-full font-sans text-[11px] transition-all duration-200"
+                      className="px-4 py-2 min-h-[40px] rounded-full font-sans text-[11px] transition-all duration-200"
                       style={{
                         background:   selected === v ? "rgba(201,169,110,0.18)" : "rgba(255,255,255,0.06)",
                         border:       selected === v ? "1px solid rgba(201,169,110,0.6)" : "1px solid rgba(255,255,255,0.22)",

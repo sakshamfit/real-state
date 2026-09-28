@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 import { useImageSequence } from "@/hooks/useImageSequence";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { frameSrc2, clamp } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -33,6 +34,7 @@ export function ScrollSection({ prevReady }: Props) {
   const barRef       = useRef<HTMLDivElement>(null);
 
   const { isLoaded, drawFrame } = useImageSequence(canvasRef, FRAME_COUNT, frameSrc2);
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   // size canvas
   const syncCanvas = useCallback(() => {
@@ -50,7 +52,8 @@ export function ScrollSection({ prevReady }: Props) {
   }, [syncCanvas]);
 
   useEffect(() => {
-    if (!prevReady || !isLoaded) return;
+    // Mobile / reduced-motion users get the static panel — no pin jacking.
+    if (!prevReady || !isLoaded || isMobile) return;
     const container = containerRef.current;
     if (!container) return;
 
@@ -98,13 +101,12 @@ export function ScrollSection({ prevReady }: Props) {
     }, container);
 
     return () => ctx.revert();
-  }, [prevReady, isLoaded, drawFrame]);
+  }, [prevReady, isLoaded, isMobile, drawFrame]);
 
   return (
     <div
       ref={containerRef}
-      className="relative w-full overflow-hidden bg-charcoal"
-      style={{ height: "100vh" }}
+      className="relative w-full h-screen-dvh overflow-hidden bg-charcoal"
     >
       <canvas ref={canvasRef} className="absolute inset-0 block w-full h-full" aria-hidden="true" />
 
@@ -117,34 +119,34 @@ export function ScrollSection({ prevReady }: Props) {
       }} />
 
       {/* section label */}
-      <div className="absolute top-20 left-8 md:left-14">
+      <div className="absolute top-20 left-6 sm:left-8 md:left-14">
         <p className="font-sans text-white/40 text-[9px] uppercase" style={{ letterSpacing: "0.28em" }}>
           Our Work
         </p>
       </div>
 
       {/* chapter counter */}
-      <div className="absolute top-20 right-8 md:right-14 text-right">
+      <div className="absolute top-20 right-6 sm:right-8 md:right-14 text-right">
         <span ref={chapNumRef} className="font-sans text-white/35 text-[11px] tabular-nums" style={{ letterSpacing: "0.18em" }}>01</span>
         <span className="font-sans text-white/15 text-[11px]"> / 03</span>
       </div>
 
       {/* animated chapter title */}
-      <div className="absolute bottom-28 md:bottom-32 left-8 md:left-14">
+      <div className="absolute bottom-28 md:bottom-32 left-6 sm:left-8 md:left-14 right-6 sm:right-8">
         <p ref={chapSubRef} className="font-sans text-white/45 text-[10px] mb-3 uppercase" style={{ letterSpacing: "0.18em" }}>
           Where the story begins
         </p>
         <h2
           ref={chapTitleRef}
           className="font-serif text-white"
-          style={{ fontSize: "clamp(2.2rem, 4.5vw, 5rem)", lineHeight: 1.1 }}
+          style={{ fontSize: "clamp(1.9rem, 6vw, 5rem)", lineHeight: 1.1 }}
         >
           Site &amp;<br />Foundation
         </h2>
       </div>
 
-      {/* glass stat cards */}
-      <div className="absolute right-8 md:right-14 flex flex-col gap-2.5" style={{ top: "50%", transform: "translateY(-50%)" }}>
+      {/* glass stat cards — desktop only (they collide with the title on small screens) */}
+      <div className="hidden md:flex absolute right-8 md:right-14 flex-col gap-2.5" style={{ top: "50%", transform: "translateY(-50%)" }}>
         {[
           { n: "180",  label: "Frames of\nprogress" },
           { n: "4.2M", label: "Sq ft\ndelivered" },
