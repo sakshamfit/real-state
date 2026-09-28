@@ -17,11 +17,11 @@ export function ProcessSection() {
   const inView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section ref={ref} className="relative bg-black py-28 md:py-40 px-8 md:px-14 overflow-hidden">
+    <section ref={ref} className="relative bg-black py-20 sm:py-28 md:py-40 px-6 sm:px-8 md:px-14 overflow-hidden">
       <div className="max-w-screen-xl mx-auto">
 
         {/* ── Header ──────────────────────────────────────────────────── */}
-        <div className="mb-16 md:mb-20 max-w-xl">
+        <div className="mb-10 sm:mb-16 md:mb-20 max-w-xl">
           <motion.div
             className="flex items-center gap-3 mb-7"
             initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -35,7 +35,7 @@ export function ProcessSection() {
 
           <motion.h2
             className="font-serif text-white"
-            style={{ fontSize: "clamp(2.2rem, 4.5vw, 5rem)", lineHeight: 1.1 }}
+            style={{ fontSize: "clamp(1.9rem, 6vw, 5rem)", lineHeight: 1.1 }}
             initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.85, delay: 0.1 }}
           >
@@ -45,11 +45,11 @@ export function ProcessSection() {
         </div>
 
         {/* ── Steps grid ──────────────────────────────────────────────── */}
-        <div className="grid md:grid-cols-3 gap-0 border-t border-l border-white/[0.14]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-0 border-t border-l border-white/[0.14]">
           {STEPS.map((s, i) => (
             <motion.div
               key={s.num}
-              className="border-b border-r border-white/[0.14] p-8 md:p-10 group hover:bg-white/[0.04] transition-colors duration-300"
+              className="border-b border-r border-white/[0.14] p-7 sm:p-8 md:p-10 group hover:bg-white/[0.04] transition-colors duration-300"
               initial={{ opacity: 0, y: 28 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.65, delay: 0.08 + (i % 3) * 0.1 + Math.floor(i / 3) * 0.15 }}

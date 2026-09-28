@@ -4,6 +4,7 @@ import { useEffect, useRef, useCallback } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useImageSequence } from "@/hooks/useImageSequence";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { frameSrc3, clamp } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -23,6 +24,7 @@ export function TestimonialSection({ prevReady, onReady }: Props) {
   const barRef       = useRef<HTMLDivElement>(null);
 
   const { isLoaded, drawFrame } = useImageSequence(canvasRef, FRAME_COUNT, frameSrc3);
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   const syncCanvas = useCallback(() => {
     const c = canvasRef.current;
@@ -39,7 +41,8 @@ export function TestimonialSection({ prevReady, onReady }: Props) {
   }, [syncCanvas]);
 
   useEffect(() => {
-    if (!prevReady || !isLoaded) return;
+    // Mobile / reduced-motion users get the static panel — no pin jacking.
+    if (!prevReady || !isLoaded || isMobile) return;
     const container = containerRef.current;
     if (!container) return;
 
@@ -64,13 +67,12 @@ export function TestimonialSection({ prevReady, onReady }: Props) {
     }, container);
 
     return () => ctx.revert();
-  }, [prevReady, isLoaded, drawFrame, onReady]);
+  }, [prevReady, isLoaded, isMobile, drawFrame, onReady]);
 
   return (
     <div
       ref={containerRef}
-      className="relative w-full overflow-hidden bg-charcoal"
-      style={{ height: "100vh" }}
+      className="relative w-full h-screen-dvh overflow-hidden bg-charcoal"
     >
       <canvas
         ref={canvasRef}
@@ -87,7 +89,7 @@ export function TestimonialSection({ prevReady, onReady }: Props) {
       }} />
 
       {/* Section label */}
-      <div className="absolute top-20 left-8 md:left-14">
+      <div className="absolute top-20 left-6 sm:left-8 md:left-14">
         <p className="font-sans text-white/35 text-[9px] uppercase" style={{ letterSpacing: "0.28em" }}>
           Client Words
         </p>
@@ -95,23 +97,23 @@ export function TestimonialSection({ prevReady, onReady }: Props) {
 
       {/* Giant quote mark */}
       <span
-        className="absolute left-8 md:left-14 top-32 font-serif text-white/[0.06] select-none pointer-events-none leading-none"
+        className="absolute left-6 sm:left-8 md:left-14 top-32 font-serif text-white/[0.06] select-none pointer-events-none leading-none"
         style={{ fontSize: "clamp(8rem, 18vw, 22rem)", lineHeight: 0.8 }}
         aria-hidden
       >
-        "
+        &ldquo;
       </span>
 
       {/* Quote — always visible */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-8 md:px-20 text-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 sm:px-8 md:px-20 text-center">
         <blockquote
           className="font-serif text-white max-w-4xl"
-          style={{ fontSize: "clamp(1.5rem, 3vw, 3rem)", lineHeight: 1.35 }}
+          style={{ fontSize: "clamp(1.35rem, 5vw, 3rem)", lineHeight: 1.35 }}
         >
-          "Meridian didn't build us a house.{" "}
+          &ldquo;Meridian didn&rsquo;t build us a house.{" "}
           <em className="text-white/60">
             They gave us a place the family will fight over for generations.
-          </em>"
+          </em>&rdquo;
         </blockquote>
 
         <div className="mt-8 h-px w-12 bg-gold mx-auto" />

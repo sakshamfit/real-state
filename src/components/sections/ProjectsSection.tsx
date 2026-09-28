@@ -17,11 +17,11 @@ export function ProjectsSection() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section ref={ref} className="relative bg-black py-28 md:py-40 px-8 md:px-14">
+    <section ref={ref} className="relative bg-black py-20 sm:py-28 md:py-40 px-6 sm:px-8 md:px-14">
       <div className="max-w-screen-xl mx-auto">
 
         {/* Header */}
-        <div className="flex items-end justify-between mb-16 md:mb-20">
+        <div className="flex items-end justify-between mb-10 sm:mb-16 md:mb-20">
           <div>
             <motion.div
               className="flex items-center gap-3 mb-7"
@@ -33,7 +33,7 @@ export function ProjectsSection() {
             </motion.div>
             <motion.h2
               className="font-serif text-white"
-              style={{ fontSize: "clamp(2rem, 4.5vw, 5rem)", lineHeight: 1.1 }}
+              style={{ fontSize: "clamp(1.9rem, 6vw, 5rem)", lineHeight: 1.1 }}
               initial={{ opacity: 0, y: 18 }} animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.08 }}
             >
@@ -61,11 +61,12 @@ export function ProjectsSection() {
             return (
               <motion.div
                 key={p.id}
-                className={`relative group cursor-pointer rounded-2xl ${isFeatured ? "md:col-span-2" : ""}`}
+                className={`relative group cursor-pointer rounded-2xl ${isFeatured ? "md:col-span-2" : ""} ${
+                  isTall ? "min-h-[300px] md:min-h-[380px]" : "min-h-[220px] md:min-h-[260px]"
+                }`}
                 style={{
                   background:   isHovered ? "rgba(201,169,110,0.05)" : "rgba(255,255,255,0.03)",
                   border:       isHovered ? "1px solid rgba(201,169,110,0.28)" : "1px solid rgba(255,255,255,0.08)",
-                  minHeight:    isTall ? 380 : 260,
                   transition:   "background 0.4s ease, border-color 0.4s ease",
                 }}
                 initial={{ opacity: 0, y: 28 }}
@@ -74,7 +75,7 @@ export function ProjectsSection() {
                 onMouseEnter={() => setHovered(p.id)}
                 onMouseLeave={() => setHovered(null)}
               >
-                <div className={`p-8 ${isFeatured ? "md:p-12" : "md:p-9"} h-full flex flex-col`}>
+                <div className={`p-6 sm:p-8 ${isFeatured ? "md:p-12" : "md:p-9"} h-full flex flex-col`}>
 
                   {/* Top row — number + arrow */}
                   <div className="flex items-start justify-between">
@@ -107,7 +108,7 @@ export function ProjectsSection() {
                     <h3
                       className="font-serif text-white mb-2.5 transition-colors duration-300 group-hover:text-gold/90"
                       style={{
-                        fontSize:   isFeatured ? "clamp(1.8rem, 3vw, 3rem)" : "clamp(1.15rem, 2vw, 1.7rem)",
+                        fontSize:   isFeatured ? "clamp(1.55rem, 5vw, 3rem)" : "clamp(1.15rem, 3.5vw, 1.7rem)",
                         lineHeight: 1.12,
                       }}
                     >

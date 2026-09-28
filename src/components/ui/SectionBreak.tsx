@@ -17,12 +17,11 @@ export function SectionBreak({ index, label, heading, sub }: Props) {
   return (
     <div
       ref={ref}
-      className="relative w-full bg-charcoal flex flex-col justify-end px-8 md:px-14 pb-20 md:pb-28 overflow-hidden"
-      style={{ height: "100vh" }}
+      className="relative w-full h-screen-dvh bg-charcoal flex flex-col justify-end px-6 sm:px-8 md:px-14 pb-20 md:pb-28 overflow-hidden"
     >
       {/* faint section index watermark */}
       <span
-        className="absolute right-8 md:right-14 top-1/2 -translate-y-1/2 font-serif text-white select-none pointer-events-none"
+        className="absolute right-6 sm:right-8 md:right-14 top-1/2 -translate-y-1/2 font-serif text-white select-none pointer-events-none"
         style={{ fontSize: "clamp(10rem, 22vw, 28rem)", opacity: 0.04, lineHeight: 1 }}
         aria-hidden
       >
@@ -31,7 +30,7 @@ export function SectionBreak({ index, label, heading, sub }: Props) {
 
       {/* top-left label */}
       <motion.p
-        className="absolute top-10 left-8 md:left-14 font-sans text-white/30 text-[10px] uppercase"
+        className="absolute top-10 left-6 sm:left-8 md:left-14 font-sans text-white/30 text-[10px] uppercase"
         style={{ letterSpacing: "0.28em" }}
         initial={{ opacity: 0, y: 10 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -52,7 +51,7 @@ export function SectionBreak({ index, label, heading, sub }: Props) {
       {/* main heading */}
       <motion.h2
         className="font-serif text-white"
-        style={{ fontSize: "clamp(3rem, 7vw, 8rem)", lineHeight: 1.0 }}
+        style={{ fontSize: "clamp(2.4rem, 8vw, 8rem)", lineHeight: 1.0 }}
         initial={{ opacity: 0, y: 32 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
@@ -78,7 +77,7 @@ export function SectionBreak({ index, label, heading, sub }: Props) {
 
       {/* scroll hint */}
       <motion.div
-        className="absolute bottom-10 right-8 md:right-14 flex items-center gap-3"
+        className="absolute bottom-10 right-6 sm:right-8 md:right-14 flex items-center gap-3"
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.8, delay: 0.6 }}

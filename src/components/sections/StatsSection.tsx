@@ -37,7 +37,7 @@ function Counter({ target, suffix, decimals }: { target: number; suffix: string;
 
 export function StatsSection() {
   return (
-    <section className="relative bg-black border-t border-b border-white/[0.12] py-24 md:py-32 px-8 md:px-14 overflow-hidden">
+    <section className="relative bg-black border-t border-b border-white/[0.12] py-16 sm:py-24 md:py-32 px-6 sm:px-8 md:px-14 overflow-hidden">
 
       {/* MDG watermark */}
       <span
@@ -48,15 +48,15 @@ export function StatsSection() {
         MDG
       </span>
 
-      <div className="max-w-screen-xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-0 relative z-10">
+      <div className="max-w-screen-xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-10 md:gap-0 relative z-10">
         {STATS.map((s, i) => (
           <div
             key={i}
-            className="flex flex-col items-center text-center md:border-r border-white/[0.12] last:border-0 md:px-10 py-4"
+            className="flex flex-col items-center text-center md:border-r border-white/[0.12] last:border-0 px-2 md:px-10 py-4"
           >
             <p
               className="font-serif text-white"
-              style={{ fontSize: "clamp(3rem, 5.5vw, 6.5rem)", lineHeight: 1, letterSpacing: "-0.02em" }}
+              style={{ fontSize: "clamp(2.4rem, 9vw, 6.5rem)", lineHeight: 1, letterSpacing: "-0.02em" }}
             >
               <Counter target={s.value} suffix={s.suffix} decimals={s.decimals} />
             </p>
